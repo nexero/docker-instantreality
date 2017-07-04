@@ -19,7 +19,7 @@ OPTIONS=(
          "$DOCKER_BINARY"
          'run'
          '--rm'
-         '-it'
+         #'-it'
          '-v /tmp/.X11-unix:/tmp/.X11-unix'
          '-e DISPLAY'
          '--device=/dev/dri:/dev/dri'
