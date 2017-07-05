@@ -74,23 +74,11 @@ elif [ -d /usr/lib/gtk-2.0 ]; then
   OPTIONS+=('-v /usr/lib/gtk-3.0:/usr/lib/x86_64-linux-gnu/gtk-3.0')
 fi
 
-# for /vol access
-if [ -d /vol ]; then
-  OPTIONS+=('-v /vol:/vol')
-fi
-
 # choose the image
 if hash nvidia-docker 2>/dev/null; then
-  IMAGE="4b3abae928f3"
   OPTIONS+=('nexero/instantplayer:trusty-nvidia')
 else
-  IMAGE="98f2e66a8b62"
   OPTIONS+=('nexero/instantplayer:trusty-intel')
-fi
-
-# load docker image from /vol/clfvr
-if ! sudo docker images -q | grep $IMAGE; then
-  cat /vol/clfvr/docker/instantplayer/$IMAGE.tar | sudo docker load
 fi
 
 # launch with dbus-launch, because otherwise there won't be a dbus-connection and the app may complain about that
